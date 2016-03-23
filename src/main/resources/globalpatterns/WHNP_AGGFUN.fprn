@@ -1,0 +1,9 @@
+template
+{*}* WP|WDT {*/*/*/*/O/O}* */*/*/*/O/!O#1 {*/*/*/*/M|S#2}* {*}*
+
+select <grupbyvar> <aggregationFunction##1>(xsd:decimal(?measure)) { 
+?obs qb:dataSet <dataset> .
+?obs <measure##2> ?measure .
+<constraints>
+}
+<groupby>

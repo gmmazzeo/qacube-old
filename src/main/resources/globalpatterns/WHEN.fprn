@@ -1,0 +1,8 @@
+template
+*/when {*}*
+
+select distinct ?ans { 
+?obs qb:dataSet <dataset> .
+?obs lso:refDate ?ans .
+<constraints>
+}
