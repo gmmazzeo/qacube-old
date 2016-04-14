@@ -29,7 +29,7 @@ public class Translator {
     FlatPattern pattern;
     HashMap<AnnotatedText, ArrayList<Triple>> kbAnnotations;
     AnnotatedTokens annotatedTokens;
-    Pattern prn = Pattern.compile("(<(.+)##(.+)>)");
+    Pattern prn = Pattern.compile("(<([^<>]+)##([^<>]+)>)");
 
     public Translator(FlatPattern pattern, AnnotatedTokens annotatedTokens, HashMap<AnnotatedText, ArrayList<Triple>> kbAnnotations) {
         this.pattern = pattern;

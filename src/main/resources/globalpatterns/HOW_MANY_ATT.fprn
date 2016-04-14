@@ -1,7 +1,7 @@
 template
 {*}* */how */many {*/*/*/*/O/O}* {*/*/*/*/A|D#1}+ {*}*
 
-select <groupbyvar> count(distinct ?ans) { 
+select <groupbyvar> (count(distinct ?ans) as ?countans) where { 
 ?obs qb:dataSet <dataset> .
 ?obs <property##1> ?ans .
 <constraints>

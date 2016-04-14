@@ -1,7 +1,7 @@
 template
 {*}* */how */much|high {*}*
 
-select <groupbyvar> sum(xsd:decimal(?measure)) { 
+select <groupbyvar> (sum(xsd:decimal(?measure)) as ?sumans) where { 
 ?obs qb:dataSet <dataset> .
 ?obs <measure> ?measure .
 <constraints>

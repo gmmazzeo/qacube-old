@@ -1,7 +1,7 @@
 template
 {*}* WP|WDT {*/*/*/*/O/O}* */*/*/*/O/!O#1 {*/*/*/*/M|S#2}* {*}*
 
-select <grupbyvar> <aggregationFunction##1>(xsd:decimal(?measure)) { 
+select <groupbyvar> (<aggregationFunction##1>(xsd:decimal(?measure)) as ?aggans) where { 
 ?obs qb:dataSet <dataset> .
 ?obs <measure##2> ?measure .
 <constraints>
