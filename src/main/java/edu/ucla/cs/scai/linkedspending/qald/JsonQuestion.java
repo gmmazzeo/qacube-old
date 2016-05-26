@@ -16,11 +16,18 @@ public class JsonQuestion {
     JsonQuery query;
     JsonAnswer[] answers;
 
+    public JsonQuestion(String id, JsonUtterance[] question, JsonQuery query, JsonAnswer[] answers) throws Exception {
+        this.id = id;
+        this.question = question;
+        this.query = query;
+        this.answers = answers;
+    }
+
     public JsonQuestion(String id, JsonUtterance[] question, JsonQuery query, SparqlEndpoint endPoint) throws Exception {
         this.id = id;
         this.question = question;
         this.query = query;
-        answers=endPoint.executeQuery(query);
+        answers = endPoint.executeQuery(query);
     }
 
     public String getId() {

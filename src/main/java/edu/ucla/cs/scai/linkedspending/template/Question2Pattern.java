@@ -17,22 +17,36 @@ import java.util.HashMap;
  */
 public class Question2Pattern {
 
-    FlatPatternMatcher matcher = new FlatPatternMatcher();
+    FlatPatternMatcher matcher;
     private final Tokenizer parser = new Tokenizer();
 
     public FlatPattern getPatternByName(String name, String type) {
         return matcher.getPatternByName(name, type);
     }
-    
+
     public HashMap<FlatPattern, AnnotatedTokens> getPatterns(String qt, KbTagsProvider kbTagger, DataSet dataset) throws Exception {
         return matcher.match(parser.tokenize(qt, kbTagger), FlatPattern.TEMPLATE);
-    }    
-    
+    }
+
     public HashMap<FlatPattern, AnnotatedTokens> getFeatures(String qt, KbTagsProvider kbTagger, DataSet dataset, String featureType) throws Exception {
         return matcher.match(parser.tokenize(qt, kbTagger), featureType);
-    }    
+    }
+
+    public Question2Pattern() {
+        String patternPath = System.getProperty("qa3PatternPath", "/home/massimo/Dropbox/NetBeansProjects/LinkedSpending/src/main/resources/");
+        if (patternPath == null) {
+            matcher = new FlatPatternMatcher();
+        } else {
+            matcher = new FlatPatternMatcher(patternPath);
+        }
+    }
 
     public void reloadPatterns() {
-        matcher = new FlatPatternMatcher();
+        String patternPath = System.getProperty("qa3PatternPath", "/home/massimo/Dropbox/NetBeansProjects/LinkedSpending/src/main/resources/");
+        if (patternPath == null) {
+            matcher = new FlatPatternMatcher();
+        } else {
+            matcher = new FlatPatternMatcher(patternPath);
+        }
     }
 }

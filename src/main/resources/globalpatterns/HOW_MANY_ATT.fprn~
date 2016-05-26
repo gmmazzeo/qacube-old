@@ -1,5 +1,5 @@
 template
-{_}* _,how _,many {_,_,_,_,O,O}* {_,_,_,_,A|D#1}+ {_}*
+{*}* */how */many {*/*/*/*/O/O}* {*/*/*/*/A|D#1}+ {*}*
 
 select <groupbyvar> (count(distinct ?ans) as ?countans) where { 
 ?obs qb:dataSet <dataset> .

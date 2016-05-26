@@ -65,7 +65,7 @@ public class FlatPatternElement {
             token = token.substring(2, token.length() - 1);
         }
         String[] s = token.split("#");
-        String[] elements = s[0].split("\\/");
+        String[] elements = s[0].split(",");
         for (String v : elements[0].split("\\|")) {
             if (v.startsWith("!")) {
                 notTags.add(v.replace("!", ""));
@@ -132,12 +132,12 @@ public class FlatPatternElement {
             return false;
         }
         boolean ok
-                = (tags.isEmpty() || tags.contains("*") || tags.contains(token.tag()))
-                && (lemmas.isEmpty() || lemmas.contains("*") || lemmas.contains(token.lemma()))
-                && (words.isEmpty() || words.contains("*") || words.contains(token.lemma()))
-                && (ners.isEmpty() || ners.contains("*") || ners.contains(token.ner()))
-                && (kbTags.isEmpty() || kbTags.contains("*") || token.hasKbTag(kbTags))
-                && (aggregateFunctions.isEmpty() || aggregateFunctions.contains("*") || aggregateFunctions.contains(token.aggregateFunction()));
+                = (tags.isEmpty() || tags.contains("_") || tags.contains(token.tag()))
+                && (lemmas.isEmpty() || lemmas.contains("_") || lemmas.contains(token.lemma()))
+                && (words.isEmpty() || words.contains("_") || words.contains(token.lemma()))
+                && (ners.isEmpty() || ners.contains("_") || ners.contains(token.ner()))
+                && (kbTags.isEmpty() || kbTags.contains("_") || token.hasKbTag(kbTags))
+                && (aggregateFunctions.isEmpty() || aggregateFunctions.contains("_") || aggregateFunctions.contains(token.aggregateFunction()));
 
         return ok == !not;
 

@@ -94,6 +94,52 @@ public class QA {
         }
         return translator.toSparql(dataset, features);
     }
+    
+    public HashMap<FlatPattern, AnnotatedTokens> findTemplate(String question, String datasetName, HashMap<AnnotatedText, ArrayList<Triple>> tagging) throws Exception {
+        DataSet dataset = datasets.get("http://linkedspending.aksw.org/instance/" + datasetName);
+        if (dataset == null) {
+            throw new Exception("Unrecognized dataset: " + datasetName);
+        }
+        KbTagsProvider kbTagger = new KbTagsProvider(tagging, dataset);
+        HashMap<FlatPattern, AnnotatedTokens> patterns = q2p.getPatterns(question, kbTagger, dataset);
+        return patterns;
+    }
+    
+    public String translateToSparql(String question, String datasetName, HashMap<AnnotatedText, ArrayList<Triple>> tagging, HashMap<FlatPattern, AnnotatedTokens> patterns) throws Exception {
+        DataSet dataset = datasets.get("http://linkedspending.aksw.org/instance/" + datasetName);
+        if (dataset == null) {
+            throw new Exception("Unrecognized dataset: " + datasetName);
+        }
+        KbTagsProvider kbTagger = new KbTagsProvider(tagging, dataset);
+        if (patterns.isEmpty()) {
+            throw new Exception("No pattern recognized");
+        }
+        if (patterns.size() > 1) { //this can be improved            
+            for (FlatPattern fp : patterns.keySet()) {
+                System.out.println(fp.getName());
+            }
+            throw new Exception("More than one pattern recognized");
+        }
+        FlatPattern pattern = patterns.keySet().iterator().next();
+        System.out.println(pattern.getName());
+        AnnotatedTokens annotations = patterns.values().iterator().next();
+
+        Translator translator = new Translator(pattern, annotations, tagging);
+        
+        //now, extract the features
+        HashMap<String, HashMap<FlatPattern, AnnotatedTokens>> features=new HashMap<>();
+        Matcher m = prn.matcher(pattern.getTemplate());
+        while (m.find()) {
+            String featureType = m.group(1);
+            featureType=featureType.substring(1, featureType.length()-1);
+            HashMap<FlatPattern, AnnotatedTokens> typeFeatures=q2p.getFeatures(question, kbTagger, dataset, featureType);
+            if (typeFeatures!=null) {
+                features.put(featureType, typeFeatures);
+            }
+        }
+        return translator.toSparql(dataset, features);        
+    }
+    
 
     public void printTags(String question, String dataset, HashMap<AnnotatedText, ArrayList<Triple>> tagging) {
         KbTagsProvider kbTagger = new KbTagsProvider(tagging, datasets.get("http://linkedspending.aksw.org/instance/" + dataset));

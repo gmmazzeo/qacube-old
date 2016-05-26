@@ -44,11 +44,15 @@ public class SparqlEndpoint {
     }
 
     public JsonAnswer[] executeQuery(JsonQuery jsonQuery) throws Exception {
+        return executeQuery(jsonQuery.sparql);
+    }
+    
+    public JsonAnswer[] executeQuery(String sparqlQuery) throws Exception {
         StringBuilder sb=new StringBuilder();
         for (Map.Entry<String, String> e:prefixes.entrySet()) {
             sb.append("PREFIX ").append(e.getKey()).append("\t<").append(e.getValue()).append(">\n");
         }
-        sb.append(jsonQuery.sparql);
+        sb.append(sparqlQuery);
         System.out.println(sb.toString());
         Query query = QueryFactory.create(sb.toString().replaceAll("\\s+", " "));
         QueryExecution qexec = QueryExecutionFactory.sparqlService(endPointURI, query);
@@ -68,4 +72,5 @@ public class SparqlEndpoint {
         JsonAnswer jAnswer = new JsonAnswer(new JsonResults(bindings));
         return new JsonAnswer[]{jAnswer};
     }
+    
 }

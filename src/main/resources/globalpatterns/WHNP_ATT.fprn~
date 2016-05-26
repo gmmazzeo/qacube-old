@@ -1,5 +1,5 @@
 template
-{_}* WP|WDT {_,_,_,_,O,O}* {_,_,_,_,A|D#1}+ {_}*
+{*}* WP|WDT {*/*/*/*/O/O}* {*/*/*/*/A|D#1}+ {*}*
 
 select distinct ?ans where { 
 ?obs qb:dataSet <dataset> .

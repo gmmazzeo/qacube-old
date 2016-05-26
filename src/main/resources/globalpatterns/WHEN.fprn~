@@ -1,5 +1,5 @@
 template
-_,when {_}*
+_/when {_}*
 
 select distinct ?ans where { 
 ?obs qb:dataSet <dataset> .

@@ -1,9 +1,9 @@
 template
-{_}* WP|WDT {_,_,_,_,O,O}* {_,_,_,_,M|S#2}+ {_}*
+{*}* */how */much|high {*}*
 
 select <groupbyvar> (sum(xsd:decimal(?measure)) as ?sumans) where { 
 ?obs qb:dataSet <dataset> .
-?obs <measure##2> ?measure .
+?obs <measure> ?measure .
 <constraints>
 }
 <groupby>

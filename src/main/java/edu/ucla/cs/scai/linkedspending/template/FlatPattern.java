@@ -22,6 +22,7 @@ public class FlatPattern {
     String name, type;
     ArrayList<FlatPatternElement> elements = new ArrayList<>();
     String template;
+    String expression;
 
     public FlatPattern(String name, String stringPattern) throws Exception {
         this.name = name;
@@ -41,6 +42,7 @@ public class FlatPattern {
         type = lines[0];
         patternString = lines[1];
 
+        this.expression = patternString;
         String[] tokens = patternString.split(" ");
         for (String token : tokens) {
             elements.add(new FlatPatternElement(token));
@@ -62,6 +64,10 @@ public class FlatPattern {
 
     public String getName() {
         return name;
+    }
+
+    public String getExpression() {
+        return expression;
     }
 
     public String getType() {

@@ -1,5 +1,5 @@
 template
-{*}* */how */much|high {*}*
+{_}* _,how _,much|high {_}*
 
 select <groupbyvar> (sum(xsd:decimal(?measure)) as ?sumans) where { 
 ?obs qb:dataSet <dataset> .
